@@ -4,15 +4,64 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="App_Plugins\BlockListElements\image\image.html" />
+    <Content Include="App_Plugins\BlockListElements\image\imagecontroller2.txt" />
+    <Content Include="App_Plugins\BlockListElements\RichText\RichText.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Plugins\BlockListElements\image\image.controller.js" />
+    <None Include="App_Plugins\BlockListElements\package.manifest" />
+    <None Include="Views\Blog.cshtml" />
+    <None Include="Views\Blogpost.cshtml" />
+    <None Include="Views\contact.cshtml" />
+    <None Include="Views\contentPage.cshtml" />
+    <None Include="Views\home.cshtml" />
+    <None Include="Views\MacroPartials\FeaturedProducts.cshtml" />
+    <None Include="Views\MacroPartials\LatestBlogposts.cshtml" />
+    <None Include="Views\master.cshtml" />
+    <None Include="Views\Partials\blockgrid\area.cshtml" />
+    <None Include="Views\Partials\blockgrid\areas.cshtml" />
+    <None Include="Views\Partials\blockgrid\Components\umbBlockGridDemoHeadlineBlock.cshtml" />
+    <None Include="Views\Partials\blockgrid\Components\umbBlockGridDemoImageBlock.cshtml" />
+    <None Include="Views\Partials\blockgrid\Components\umbBlockGridDemoRichTextBlock.cshtml" />
+    <None Include="Views\Partials\blockgrid\Components\umbBlockGridDemoTwoColumnLayoutBlock.cshtml" />
+    <None Include="Views\Partials\blockgrid\default.cshtml" />
+    <None Include="Views\Partials\blockgrid\items.cshtml" />
+    <None Include="Views\Partials\blocklist\Components\Feature.cshtml" />
+    <None Include="Views\Partials\blocklist\default.cshtml" />
+    <None Include="Views\Partials\CategoryLinks.cshtml" />
+    <None Include="Views\Partials\ContactForm.cshtml" />
+    <None Include="Views\Partials\grid\bootstrap3-fluid.cshtml" />
+    <None Include="Views\Partials\grid\bootstrap3.cshtml" />
+    <None Include="Views\Partials\grid\editors\base.cshtml" />
+    <None Include="Views\Partials\grid\editors\embed.cshtml" />
+    <None Include="Views\Partials\grid\editors\macro.cshtml" />
+    <None Include="Views\Partials\grid\editors\media.cshtml" />
+    <None Include="Views\Partials\grid\editors\rte.cshtml" />
+    <None Include="Views\Partials\grid\editors\textstring.cshtml" />
+    <None Include="Views\Partials\Navigation\SubNavigation.cshtml" />
+    <None Include="Views\Partials\Navigation\TopNavigation.cshtml" />
+    <None Include="Views\Partials\SectionHeader.cshtml" />
+    <None Include="Views\people.cshtml" />
+    <None Include="Views\Person.cshtml" />
+    <None Include="Views\Product.cshtml" />
+    <None Include="Views\Products.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+  </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bergmania.OpenStreetMap.Core" Version="5.3.1" />
     <PackageReference Include="Umbraco.Cms" Version="12.3.3" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->
     <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="68.2.0.9" />
+    <PackageReference Include="Umbraco.Cms.Core" Version="12.3.3" />
+    <PackageReference Include="Umbraco.Cms.Infrastructure" Version="12.3.3" />
     <PackageReference Include="Umbraco.TheStarterKit" Version="12.0.0" />
+    <ProjectReference Include="..\UmbracoTutorial.Core\UmbracoTutorial.Core.csproj" />
     <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="68.2.0.9" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))" />
   </ItemGroup>
 

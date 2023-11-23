@@ -1,6 +1,6 @@
 ﻿
 @using Umbraco.Extensions
-@using Umbraco.Cms.Web.Common.PublishedModels;
+@using UmbracoTutorial.Core.UmbracoModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Home>
 @{
     Layout = "master.cshtml";
@@ -17,10 +17,12 @@
                 @Model.HeroCtacaption
             </a>
         }
+        <p>@Model.HeroDescription</p>
+        <p>ShortHeroDescription</p>
     </div>
 </section>
 
-<section class="section section">
+<section class="section section">//
     @await Html.GetBlockGridHtmlAsync(Model, "bodyText")
 </section>
 
