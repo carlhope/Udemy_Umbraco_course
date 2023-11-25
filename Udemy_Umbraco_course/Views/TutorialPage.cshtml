@@ -1,6 +1,7 @@
-﻿@using ContentModels = UmbracoTutorial.Core.UmbracoModels
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Blog>
+﻿@using UmbracoTutorial.Core.UmbracoModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<TutorialPage>
 
 @{
 	Layout = null;
 }
+<h1>@Model.Description</h1>

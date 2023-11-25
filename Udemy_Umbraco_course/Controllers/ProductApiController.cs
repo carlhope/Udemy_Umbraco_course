@@ -1,15 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Web.Common.Controllers;
+using UmbracoTutorial.Core.Repository;
 
 namespace UmbracoTutorial.Controllers
 {
     // /umbraco/api/productapi/{action}
     public class ProductApiController : UmbracoApiController
     {
+        private readonly IProductRepository _productRepository;
+        public ProductApiController(IProductRepository productRepository)
+        {
+			_productRepository = productRepository;
+		}
+
         [HttpGet("api/products")] // /umbraco/api/productapi/read
         public IActionResult Read()
         {
-            return Ok("read");
+            return Ok(_productRepository.GetProducts());
         }
         [HttpPost("api/products")] // /umbraco/api/productapi/create
         public IActionResult Create()
