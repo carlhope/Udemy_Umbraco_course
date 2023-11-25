@@ -1,3 +1,5 @@
+using UmbracoTutorial.Core.Repository;
+
 namespace Udemy_Umbraco_course
 {
     public class Startup
@@ -35,6 +37,8 @@ namespace Udemy_Umbraco_course
                 .AddDeliveryApi()
                 .AddComposers()
                 .Build();
+
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
 
         /// <summary>
