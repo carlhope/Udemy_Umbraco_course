@@ -6,7 +6,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="App_Plugins\BlockListElements\image\image.html" />
-    <Content Include="App_Plugins\BlockListElements\image\imagecontroller2.txt" />
+    <Content Include="App_Plugins\BlockListElements\image\oldcontroller.txt" />
+    <Content Include="App_Plugins\BlockListElements\image\oldimagehtml.txt" />
     <Content Include="App_Plugins\BlockListElements\RichText\RichText.html" />
   </ItemGroup>
   <ItemGroup>
