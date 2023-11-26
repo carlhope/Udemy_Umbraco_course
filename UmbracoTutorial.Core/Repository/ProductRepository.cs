@@ -16,13 +16,22 @@ namespace UmbracoTutorial.Core.Repository
 		{
 			_umbracoContextFactory = umbracoContextFactory;
 		}
-		public List<Product> GetProducts()
+		public List<Product> GetProducts(string? productSKU, Decimal?maxPrice)
 		{
 			var products = GetProductsRootPage();
 			var final = new List<Product>();
 			if(products is Products productsRoot)
 			{
-				final = productsRoot.Children<Product>()?.Where(x=>x.IsPublished())?.ToList() ?? new List<Product>();
+				var filteredProducts = productsRoot.Children<Product>()?.Where(x => x.IsPublished());
+				if (!string.IsNullOrEmpty(productSKU))
+				{
+					filteredProducts = filteredProducts?.Where(x => x.Sku.InvariantEquals(productSKU));
+				}
+				if(maxPrice is decimal MaxPrice)
+				{
+					filteredProducts = filteredProducts?.Where(x => x.Price <= MaxPrice);
+				}
+				final = filteredProducts?.ToList()??new List<Product>();
 			}
 			return final;
 		}

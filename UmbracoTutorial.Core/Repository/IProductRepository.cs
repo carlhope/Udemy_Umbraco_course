@@ -9,6 +9,6 @@ namespace UmbracoTutorial.Core.Repository
 {
 	public interface IProductRepository
 	{
-		List<Product> GetProducts();
+		List<Product> GetProducts(string? productSKU, decimal? maxPrice);
 	}
 }
