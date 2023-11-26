@@ -14,8 +14,9 @@ namespace UmbracoTutorial.Core.Models
         [Required]
         public decimal Price { get; set; }
         [Required]
-        public string Description { get; set; }
+        public List<string> Categories { get; set; }
         [Required]
+        public string Description { get; set; }
         public string? SKU { get; set; }
         public string PhotoFileName { get; set; }
         [Required]

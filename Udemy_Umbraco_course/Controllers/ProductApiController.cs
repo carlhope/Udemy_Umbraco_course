@@ -2,6 +2,7 @@
 using Udemy_Umbraco_course.ViewModels.Api;
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Web.Common.Controllers;
+using UmbracoTutorial.Core.Models;
 using UmbracoTutorial.Core.Repository;
 using UmbracoTutorial.Core.UmbracoModels;
 
@@ -27,9 +28,18 @@ namespace UmbracoTutorial.Controllers
             return Ok(mapped);
         }
         [HttpPost] // /umbraco/api/productapi/create
-        public IActionResult Create()
+        public IActionResult Create([FromBody]ProductCreationItem request)
         {
-            return Ok("create");
+            if(!ModelState.IsValid)
+            {
+				return BadRequest("Fields error");
+			}
+            var product = _productRepository.Create(request);
+            if(product == null)
+            {
+                StatusCode(StatusCodes.Status500InternalServerError, $"error creating product");
+            }
+			return Ok(_mapper.Map<Product, ProductApiResponseItem>(product));
         }
         [HttpPut] // /umbraco/api/productapi/update
         public IActionResult Update()
