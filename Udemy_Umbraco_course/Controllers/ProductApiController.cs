@@ -7,7 +7,8 @@ using UmbracoTutorial.Core.UmbracoModels;
 
 namespace UmbracoTutorial.Controllers
 {
-    // /umbraco/api/productapi/{action}
+    // /umbraco/api/productapi/{action} default route
+    [Route("api/products")] //new route
     public class ProductApiController : UmbracoApiController
     {
         private readonly IProductRepository _productRepository;
@@ -19,26 +20,27 @@ namespace UmbracoTutorial.Controllers
 		}
 
         public record ProductReadRequest(string? productSKU, decimal? maxPrice);
-        [HttpGet("api/products")] // /umbraco/api/productapi/read
+        [HttpGet] // /umbraco/api/productapi/read
         public IActionResult Read([FromQuery] ProductReadRequest request)
         {
             var mapped = _mapper.MapEnumerable<Product, ProductApiResponseItem>(_productRepository.GetProducts(request.productSKU,request.maxPrice));
             return Ok(mapped);
         }
-        [HttpPost("api/products")] // /umbraco/api/productapi/create
+        [HttpPost] // /umbraco/api/productapi/create
         public IActionResult Create()
         {
             return Ok("create");
         }
-        [HttpPut("api/products")] // /umbraco/api/productapi/update
+        [HttpPut] // /umbraco/api/productapi/update
         public IActionResult Update()
         {
             return Ok("update");
         }
-        [HttpDelete("api/products")] // /umbraco/api/productapi/delete
-        public IActionResult Delete()
+        [HttpDelete("{id:int}")] // /umbraco/api/productapi/delete
+        public IActionResult Delete(int id)
         {
-            return Ok("delete");
+           var result = _productRepository.Delete(id);
+            return result ? Ok("deleted") : StatusCode(StatusCodes.Status500InternalServerError, $"error deleting product with id {id}");
         }
     }
 }
