@@ -41,15 +41,28 @@ namespace UmbracoTutorial.Controllers
             }
 			return Ok(_mapper.Map<Product, ProductApiResponseItem>(product));
         }
-        [HttpPut] // /umbraco/api/productapi/update
-        public IActionResult Update()
+        [HttpPut("{id:int}")] // /umbraco/api/productapi/update
+        public IActionResult Update(int id, [FromBody]ProductUpdateItem request)
         {
-            return Ok("update");
-        }
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if(_productRepository.Get(id) == null)
+            {
+				return NotFound($"product with id {id} not found");
+			}
+            var product = _productRepository.Update(id, request);
+			return Ok(_mapper.Map<Product, ProductApiResponseItem>(product));
+		}
         [HttpDelete("{id:int}")] // /umbraco/api/productapi/delete
         public IActionResult Delete(int id)
         {
-           var result = _productRepository.Delete(id);
+			if (_productRepository.Get(id) == null)
+			{
+				return NotFound($"product with id {id} not found");
+			}
+			var result = _productRepository.Delete(id);
             return result ? Ok("deleted") : StatusCode(StatusCodes.Status500InternalServerError, $"error deleting product with id {id}");
         }
     }
