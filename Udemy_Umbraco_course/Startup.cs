@@ -38,7 +38,7 @@ namespace Udemy_Umbraco_course
                 .AddComposers()
                 .Build();
 
-            services.AddScoped<IProductRepository, ProductRepository>();
+            
         }
 
         /// <summary>

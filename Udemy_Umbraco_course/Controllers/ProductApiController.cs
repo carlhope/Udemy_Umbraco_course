@@ -1,37 +1,69 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Udemy_Umbraco_course.ViewModels.Api;
+using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Web.Common.Controllers;
+using UmbracoTutorial.Core.Models;
 using UmbracoTutorial.Core.Repository;
+using UmbracoTutorial.Core.UmbracoModels;
 
 namespace UmbracoTutorial.Controllers
 {
-    // /umbraco/api/productapi/{action}
+    // /umbraco/api/productapi/{action} default route
+    [Route("api/products")] //new route
     public class ProductApiController : UmbracoApiController
     {
         private readonly IProductRepository _productRepository;
-        public ProductApiController(IProductRepository productRepository)
+        private readonly IUmbracoMapper _mapper;
+        public ProductApiController(IProductRepository productRepository,  IUmbracoMapper mapper)
         {
 			_productRepository = productRepository;
+            _mapper = mapper;
 		}
 
-        [HttpGet("api/products")] // /umbraco/api/productapi/read
-        public IActionResult Read()
+        public record ProductReadRequest(string? productSKU, decimal? maxPrice);
+        [HttpGet] // /umbraco/api/productapi/read
+        public IActionResult Read([FromQuery] ProductReadRequest request)
         {
-            return Ok(_productRepository.GetProducts());
+            var mapped = _mapper.MapEnumerable<Product, ProductApiResponseItem>(_productRepository.GetProducts(request.productSKU,request.maxPrice));
+            return Ok(mapped);
         }
-        [HttpPost("api/products")] // /umbraco/api/productapi/create
-        public IActionResult Create()
+        [HttpPost] // /umbraco/api/productapi/create
+        public IActionResult Create([FromBody]ProductCreationItem request)
         {
-            return Ok("create");
+            if(!ModelState.IsValid)
+            {
+				return BadRequest("Fields error");
+			}
+            var product = _productRepository.Create(request);
+            if(product == null)
+            {
+                StatusCode(StatusCodes.Status500InternalServerError, $"error creating product");
+            }
+			return Ok(_mapper.Map<Product, ProductApiResponseItem>(product));
         }
-        [HttpPut("api/products")] // /umbraco/api/productapi/update
-        public IActionResult Update()
+        [HttpPut("{id:int}")] // /umbraco/api/productapi/update
+        public IActionResult Update(int id, [FromBody]ProductUpdateItem request)
         {
-            return Ok("update");
-        }
-        [HttpDelete("api/products")] // /umbraco/api/productapi/delete
-        public IActionResult Delete()
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if(_productRepository.Get(id) == null)
+            {
+				return NotFound($"product with id {id} not found");
+			}
+            var product = _productRepository.Update(id, request);
+			return Ok(_mapper.Map<Product, ProductApiResponseItem>(product));
+		}
+        [HttpDelete("{id:int}")] // /umbraco/api/productapi/delete
+        public IActionResult Delete(int id)
         {
-            return Ok("delete");
+			if (_productRepository.Get(id) == null)
+			{
+				return NotFound($"product with id {id} not found");
+			}
+			var result = _productRepository.Delete(id);
+            return result ? Ok("deleted") : StatusCode(StatusCodes.Status500InternalServerError, $"error deleting product with id {id}");
         }
     }
 }

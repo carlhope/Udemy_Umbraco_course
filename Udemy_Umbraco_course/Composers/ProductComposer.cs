@@ -1,7 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Udemy_Umbraco_course.Mappings;
 using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.Mapping;
+using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Web.Common.ApplicationBuilder;
 using UmbracoTutorial.Core;
+using UmbracoTutorial.Core.Repository;
 
 
 namespace UmbracoTutorial.Composers
@@ -31,11 +35,14 @@ namespace UmbracoTutorial.Composers
                                                        action = "Details"
                                                    }
                                                    );
-                    });
-                }
-            ));
+					});
+				}
+				));
 
             });
+			builder.Services.AddScoped<IProductRepository, ProductRepository>();
+			builder.WithCollectionBuilder<MapDefinitionCollectionBuilder>()
+				.Add<ProductMapping>();
         }
     }
 }
