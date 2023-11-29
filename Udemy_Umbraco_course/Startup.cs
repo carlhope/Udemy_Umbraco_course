@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using OpenIddict.Abstractions;
+using System.Security.Cryptography.X509Certificates;
 using UmbracoTutorial.Core.Repository;
 
 namespace Udemy_Umbraco_course
@@ -38,6 +41,57 @@ namespace Udemy_Umbraco_course
                 .AddComposers()
                 .Build();
 
+            services.AddDbContext<DbContext>(
+                options =>
+                {
+				    options.UseInMemoryDatabase(nameof(DbContext));
+                    options.UseOpenIddict();
+			    });
+            services.AddOpenIddict()
+                .AddCore(Options =>
+                {
+                    Options.UseEntityFrameworkCore()
+                        .UseDbContext<DbContext>();
+                })
+                .AddServer(options =>
+                {
+                    options.AllowClientCredentialsFlow();
+                    options.SetTokenEndpointUris("connect/token");
+                    options.AddEphemeralEncryptionKey()
+                    .AddEphemeralSigningKey();
+
+
+     //               //certificate
+     //               //registering a certificate (recommended for production-ready scenarios)
+
+     //               string certificateThumbprint = _config["Auth:CertificateThumbprint"];
+     //               using(X509Store certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
+     //               {
+					//	certStore.Open(OpenFlags.ReadOnly);
+
+					//	X509Certificate2Collection certCollection = certStore.Certificates.Find(
+     //                       X509FindType.FindByThumbprint, 
+     //                       certificateThumbprint,
+     //                       true);
+
+     //                   //get the first cert with the thumbprint
+     //                   X509Store cert = certCollection.OfType<X509Certificate2>().FirstOrDefault();
+					//	if(cert is null)
+                        
+					//		throw new Exception($"Certificate with thumbprint {certificateThumbprint} was not found");
+						
+					//	options.AddSigningCertificate(cert);
+     //                   options.AddEncryptionCertificate(cert);
+					//}
+                    options.DisableAccessTokenEncryption();
+
+                    options.UseAspNetCore()
+						.EnableTokenEndpointPassthrough();
+                }).AddValidation(options =>
+                {
+                    options.UseLocalServer();
+                    options.UseAspNetCore();
+                });
             
         }
 
@@ -65,6 +119,33 @@ namespace Udemy_Umbraco_course
                     u.UseBackOfficeEndpoints();
                     u.UseWebsiteEndpoints();
                 });
+            InitializeClientAsync(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
         }
+
+        private async Task InitializeClientAsync(IServiceProvider serviceProvider, CancellationToken cancellationToken)
+        {
+			using var scope = serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<DbContext>();
+            await context.Database.EnsureCreatedAsync(cancellationToken);
+
+            var manager = scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>(); 
+
+            if(await manager.FindByClientIdAsync("postman", cancellationToken)is null)
+            {
+                await manager.CreateAsync(new OpenIddictApplicationDescriptor
+                {
+                    ClientId = "postman",
+                    ClientSecret = "postman_secret",
+                    DisplayName = "Postman Client",
+                    Permissions =
+                    {
+                        OpenIddictConstants.Permissions.Endpoints.Token,
+                        OpenIddictConstants.Permissions.GrantTypes.ClientCredentials,
+                        OpenIddictConstants.Permissions.Scopes.Roles,
+                        //OpenIddictConstants.Permissions.Prefixes.Scope,
+					}
+                });
+            }
+		}
     }
 }
