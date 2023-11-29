@@ -45,6 +45,12 @@ namespace UmbracoTutorial.Core.Repository
 		{
 			_umbracoContextFactory = umbracoContextFactory;
 			_contentService = contentService;
+			_mediaService = mediaService;
+			_mediaFileManager = mediaFileManager;
+			_shortStringHelper = shortStringHelper;
+			_mediaUrlGenerators = mediaUrlGenerators;
+			_contentTypeBaseServiceProvider = contentTypeBaseServiceProvider;
+			_publishedSnapshotAccessor = publishedSnapshotAccessor;
 		}
 
 		
@@ -125,7 +131,7 @@ namespace UmbracoTutorial.Core.Repository
 
 			return Get(productContent.Id);
 		}
-		private GuidUdi? CreateProductImage(string fileName, string photo)
+		private GuidUdi? CreateProductImage(string filename, string photo)
 		{
 			//Save image to a tmp path
 			var tmpFilePath = Path.GetTempFileName();
@@ -140,11 +146,11 @@ namespace UmbracoTutorial.Core.Repository
 				throw new InvalidOperationException("Could not open file stream");
 			}
 
-			var umbracoMedia = _mediaService.CreateMedia(fileName, _productsMediaFolder, UmbracoModels.Image.ModelTypeAlias);
+			var umbracoMedia = _mediaService.CreateMedia(filename, _productsMediaFolder, UmbracoModels.Image.ModelTypeAlias);
 
 			using (fileStream)
 			{
-				umbracoMedia.SetValue(_mediaFileManager, _mediaUrlGenerators, _shortStringHelper, _contentTypeBaseServiceProvider, Constants.Conventions.Media.File, fileName, fileStream, null,null);
+				umbracoMedia.SetValue(_mediaFileManager, _mediaUrlGenerators, _shortStringHelper, _contentTypeBaseServiceProvider, Constants.Conventions.Media.File, filename, fileStream, null,null);
 
 				var result = _mediaService.Save(umbracoMedia);
 
