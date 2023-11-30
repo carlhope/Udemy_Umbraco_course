@@ -34,7 +34,7 @@ namespace UmbracoTutorial.Composers
                                                        controller = "Product",
                                                        action = "Details"
                                                    }
-                                                   );
+												   );
 					});
 				}
 				));
