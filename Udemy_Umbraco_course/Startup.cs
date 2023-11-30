@@ -135,7 +135,7 @@ namespace Udemy_Umbraco_course
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor
                 {
                     ClientId = "postman",
-                    ClientSecret = "postman_secret",
+                    ClientSecret = "postman-secret",
                     DisplayName = "Postman Client",
                     Permissions =
                     {

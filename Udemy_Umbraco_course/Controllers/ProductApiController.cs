@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using OpenIddict.Validation.AspNetCore;
 using Udemy_Umbraco_course.ViewModels.Api;
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Web.Common.Controllers;
@@ -10,6 +12,7 @@ namespace UmbracoTutorial.Controllers
 {
     // /umbraco/api/productapi/{action} default route
     [Route("api/products")] //new route
+    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     public class ProductApiController : UmbracoApiController
     {
         private readonly IProductRepository _productRepository;

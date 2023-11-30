@@ -12,14 +12,17 @@ using static OpenIddict.Abstractions.OpenIddictConstants;
 namespace Udemy_Umbraco_course.Controllers
 {
 	[ApiController]
-	[Route("[connnect/{action}]")]
+	[Route("connect/{action}")]
 	public class AuthTokenController : ControllerBase
 	{
 		private readonly IOpenIddictScopeManager _scopeManager;
 		private readonly IOpenIddictApplicationManager _applicationManager;
-		public AuthTokenController()
+		public AuthTokenController(IOpenIddictApplicationManager applicationManager, IOpenIddictScopeManager scopeManager)
 		{
+			_scopeManager = scopeManager;
+			_applicationManager = applicationManager;
 		}
+		[HttpPost]
 		public async Task<IActionResult> Token()
 		{
 			var request = HttpContext.GetOpenIddictServerRequest() ?? throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
@@ -35,11 +38,13 @@ namespace Udemy_Umbraco_course.Controllers
 
 				var identity = new ClaimsIdentity(
 					authenticationType: TokenValidationParameters.DefaultAuthenticationType,
-					nameType: Claims.Name, roleType: Claims.Role);
+					nameType: Claims.Name, 
+					roleType: Claims.Role
+					);
 
 				identity
 					.SetClaim(Claims.Subject, request.ClientId)
-					.SetClaim(Claims.Name, await _applicationManager.GetDisplayNameAsync(request.ClientId))
+					.SetClaim(Claims.Name, await _applicationManager.GetDisplayNameAsync(application))
 					.SetClaims(Claims.Role, new[] { "ClientApplication" }.ToImmutableArray());
 
 				identity.SetScopes(request.GetScopes());
