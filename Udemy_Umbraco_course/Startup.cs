@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using OpenIddict.Abstractions;
 using System.Security.Cryptography.X509Certificates;
+using Udemy_Umbraco_course.Extensions;
 using UmbracoTutorial.Core.Repository;
+using UmbracoTutorial.Core.Services;
 
 namespace Udemy_Umbraco_course
 {
@@ -39,7 +41,10 @@ namespace Udemy_Umbraco_course
                 .AddWebsite()
                 .AddDeliveryApi()
                 .AddComposers()
+                .AddContactRequestTable()
                 .Build();
+
+            services.AddScoped<IContactRequestService, ContactRequestService>();
 
             services.AddDbContext<DbContext>(
                 options =>
