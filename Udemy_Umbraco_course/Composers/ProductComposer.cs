@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Udemy_Umbraco_course.Mappings;
+using Udemy_Umbraco_course.Routing;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Services;
@@ -15,6 +16,8 @@ namespace UmbracoTutorial.Composers
         //example.com/product/1
         public void Compose(IUmbracoBuilder builder)
         {
+            builder.UrlSegmentProviders().Insert<ProductPageUrlSegmentProvider>();
+
             builder.Services.AddScoped<IProductService, ProductService>();
 
             builder.Services.Configure<UmbracoPipelineOptions>(options =>
