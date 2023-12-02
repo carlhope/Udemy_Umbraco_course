@@ -2,8 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using OpenIddict.Abstractions;
 using System.Security.Cryptography.X509Certificates;
 using Udemy_Umbraco_course.Extensions;
+using Umbraco.Cms.Core.Notifications;
 using UmbracoTutorial.Core.Repository;
 using UmbracoTutorial.Core.Services;
+using UmbracoTutorial.Core.NotificationsHandlers;
 
 namespace Udemy_Umbraco_course
 {
@@ -42,6 +44,8 @@ namespace Udemy_Umbraco_course
                 .AddDeliveryApi()
                 .AddComposers()
                 .AddContactRequestTable()
+                .AddNotificationHandler<ContentPublishedNotification, ContentPublishedNotificationHandler>()
+                .AddNotificationHandler<ContentPublishingNotification, ContentPublishingNotificationHandler>()
                 .Build();
 
             services.AddScoped<IContactRequestService, ContactRequestService>();
