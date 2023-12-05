@@ -24,13 +24,13 @@ namespace UmbracoTutorial.Controllers
 		}
 
         public record ProductReadRequest(string? productSKU, decimal? maxPrice);
-        [HttpGet] // /umbraco/api/productapi/read
+        [HttpGet] 
         public IActionResult Read([FromQuery] ProductReadRequest request)
         {
             var mapped = _mapper.MapEnumerable<Product, ProductApiResponseItem>(_productRepository.GetProducts(request.productSKU,request.maxPrice));
             return Ok(mapped);
         }
-        [HttpPost] // /umbraco/api/productapi/create
+        [HttpPost] 
         public IActionResult Create([FromBody]ProductCreationItem request)
         {
             if(!ModelState.IsValid)
@@ -44,7 +44,7 @@ namespace UmbracoTutorial.Controllers
             }
 			return Ok(_mapper.Map<Product, ProductApiResponseItem>(product));
         }
-        [HttpPut("{id:int}")] // /umbraco/api/productapi/update
+        [HttpPut("{id:int}")] 
         public IActionResult Update(int id, [FromBody]ProductUpdateItem request)
         {
             if(!ModelState.IsValid)
@@ -58,7 +58,7 @@ namespace UmbracoTutorial.Controllers
             var product = _productRepository.Update(id, request);
 			return Ok(_mapper.Map<Product, ProductApiResponseItem>(product));
 		}
-        [HttpDelete("{id:int}")] // /umbraco/api/productapi/delete
+        [HttpDelete("{id:int}")] 
         public IActionResult Delete(int id)
         {
 			if (_productRepository.Get(id) == null)
