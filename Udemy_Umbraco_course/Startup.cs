@@ -47,6 +47,7 @@ namespace Udemy_Umbraco_course
                 .AddNotificationHandler<ContentPublishedNotification, ContentPublishedNotificationHandler>()
                 .AddNotificationHandler<ContentPublishingNotification, ContentPublishingNotificationHandler>()
                 .AddNotificationHandler<SendingContentNotification, SendingContentNotificationHandler>()
+                .AddNotificationHandler<MenuRenderingNotification, MenuRendingNotificationHandler>()
                 .Build();
 
             services.AddScoped<IContactRequestService, ContactRequestService>();
