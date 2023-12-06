@@ -9,10 +9,15 @@
     <Content Include="App_Plugins\BlockListElements\image\oldcontroller.txt" />
     <Content Include="App_Plugins\BlockListElements\image\oldimagehtml.txt" />
     <Content Include="App_Plugins\BlockListElements\RichText\RichText.html" />
+    <Content Include="App_Plugins\ContactRequests\contactrequests.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Plugins\BlockListElements\image\image.controller.js" />
     <None Include="App_Plugins\BlockListElements\package.manifest" />
+    <None Include="App_Plugins\ContactRequests\contactrequests.resource.js" />
+    <None Include="App_Plugins\ContactRequests\contactrequests.service.js" />
+    <None Include="App_Plugins\ContactRequests\contactrequests.controller.js" />
+    <None Include="App_Plugins\ContactRequests\package.manifest" />
     <None Include="Views\Blog.cshtml" />
     <None Include="Views\Blogpost.cshtml" />
     <None Include="Views\contact.cshtml" />
