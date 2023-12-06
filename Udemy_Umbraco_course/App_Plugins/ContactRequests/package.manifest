@@ -12,8 +12,7 @@
 		}
 	],
 	"javascript": [
-		"~/App_Plugins/ContactRequests/contactrequests.controller.js",
-		"~/App_Plugins/ContactRequests/contactrequests.resource.js",
-		"~/App_Plugins/ContactRequests/contactrequests.service.js"
+		"~/App_Plugins/ContactRequests/contactrequests.controller.js"
+	
 	]
 }

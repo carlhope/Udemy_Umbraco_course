@@ -7,8 +7,8 @@
         vm.contactRequests = [];
         $scope.model.badge = { count: 0 };
 
-        getTotalNumber();
-        getContentRequests();
+        //getTotalNumber();
+       // getContentRequests();
 
         function getTotalNumber() {
             contactRequestsService.getTotalNumber().then(function (number) {
