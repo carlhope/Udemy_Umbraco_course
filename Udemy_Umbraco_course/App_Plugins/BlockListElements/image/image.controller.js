@@ -13,13 +13,15 @@
             if (vm.content.image && vm.content.image.length > 0) {
 
                 mediaResource.getById(vm.content.image[0].mediaKey)
-                    .then(media) => {
-                    imageUrlGeneratorResource.getCropUrl(media.mediaLink, 200, 200).then(
-                        (result) => {
-                            vm.imageUrl = result;
-                        })
-                }
-            } else {
+                    .then(media => {
+                        imageUrlGeneratorResource.getCropUrl(media.mediaLink, 200, 200).then(
+                            (result) => {
+                                vm.imageUrl = result;
+                            })
+                    });
+            }
+            else
+            {
                 vm.imageUrl = "mmm";
             }
         }

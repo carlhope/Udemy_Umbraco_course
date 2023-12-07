@@ -38,5 +38,21 @@ namespace UmbracoTutorial.Core.Services
                return await scope.Database.FirstOrDefaultAsync<ContactRequestDBModel>("Select * FROM ContactRequests WHERE ID=@0",id);
             }
         }
-	}
+
+        public async Task<int> GetTotalNumber()
+        {
+            using (var scope = _scopeProvider.CreateScope(autoComplete:true))
+			{
+               return await scope.Database.ExecuteScalarAsync<int>("Select COUNT(*) FROM ContactRequests");
+            }
+        }
+
+        public async Task<List<ContactRequestDBModel>> GetAll()
+        {
+            using (var scope = _scopeProvider.CreateScope(autoComplete: true))
+            {
+                return await scope.Database.FetchAsync<ContactRequestDBModel>("Select * FROM ContactRequests");
+            }
+        }
+    }
 }
