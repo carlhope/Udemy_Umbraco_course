@@ -1,7 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Udemy_Umbraco_course.Mappings;
+using Udemy_Umbraco_course.Routing;
 using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.Mapping;
+using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Web.Common.ApplicationBuilder;
-using UmbracoTutorial.Core;
+using UmbracoTutorial.Core.Repository;
+using UmbracoTutorial.Core.Services;
 
 
 namespace UmbracoTutorial.Composers
@@ -11,6 +16,8 @@ namespace UmbracoTutorial.Composers
         //example.com/product/1
         public void Compose(IUmbracoBuilder builder)
         {
+            builder.UrlSegmentProviders().Insert<ProductPageUrlSegmentProvider>();
+
             builder.Services.AddScoped<IProductService, ProductService>();
 
             builder.Services.Configure<UmbracoPipelineOptions>(options =>
@@ -30,12 +37,15 @@ namespace UmbracoTutorial.Composers
                                                        controller = "Product",
                                                        action = "Details"
                                                    }
-                                                   );
-                    });
-                }
-            ));
+												   );
+					});
+				}
+				));
 
             });
+			builder.Services.AddScoped<IProductRepository, ProductRepository>();
+			builder.WithCollectionBuilder<MapDefinitionCollectionBuilder>()
+				.Add<ProductMapping>();
         }
     }
 }

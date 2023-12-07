@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UmbracoTutorial.Core.Models;
 
-namespace UmbracoTutorial.Core
+namespace UmbracoTutorial.Core.Services
 {
     public interface IProductService
     {

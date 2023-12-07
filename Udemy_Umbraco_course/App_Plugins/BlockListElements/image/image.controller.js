@@ -1,12 +1,31 @@
-﻿angular.module("umbraco").controller("bleImageController", function ($scope, mediaResource) {
+﻿(function () {
+    'use strict';
 
-    //your property is called image so the following will contain the udi:
-    var imageUdi = $scope.block.data.image;
-    //the mediaResource has a getById method:
-    mediaResource.getById(imageUdi).then(function (media) {
-        console.log(media);
-        //set a property on the 'scope' called imageUrl for the returned media object's mediaLink
-        $scope.imageUrl = media.mediaLink;
-    });
-});
-    
+    function bleImageController($scope, mediaResource, imageUrlGeneratorResource) {
+        var vm = this;
+        vm.content = $scope.block.data;
+        vm.imageUrl = "";
+        vm.alternativeText = $scope.block.data.alternativeText;
+
+        cropImage();
+        function cropImage() {
+
+            if (vm.content.image && vm.content.image.length > 0) {
+
+                mediaResource.getById(vm.content.image[0].mediaKey)
+                    .then(media => {
+                        imageUrlGeneratorResource.getCropUrl(media.mediaLink, 200, 200).then(
+                            (result) => {
+                                vm.imageUrl = result;
+                            })
+                    });
+            }
+            else
+            {
+                vm.imageUrl = "mmm";
+            }
+        }
+    }
+
+    angular.module("umbraco").controller("bleImageController", bleImageController);
+})();
