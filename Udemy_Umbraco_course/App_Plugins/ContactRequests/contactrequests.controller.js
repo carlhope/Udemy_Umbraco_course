@@ -5,10 +5,10 @@
         var vm = this;
         vm.contactRequestsNumber = 0;
         vm.contactRequests = [];
-        $scope.model.badge = { count: 0 };
+        $scope.model.badge = { count: 1 };
 
-        //getTotalNumber();
-       // getContentRequests();
+        getTotalNumber();
+        getContentRequests();
 
         function getTotalNumber() {
             contactRequestsService.getTotalNumber().then(function (number) {
