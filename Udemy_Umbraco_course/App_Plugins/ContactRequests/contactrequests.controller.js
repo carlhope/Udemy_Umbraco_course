@@ -11,14 +11,14 @@
         getContentRequests();
 
         function getTotalNumber() {
-            contactRequestsService.GetTotalNumber().then(function (number) {
+            contactRequestsService.getTotalNumber().then(function (number) {
                 vm.contactRequestsNumber = number;
                 $scope.model.badge = { count: number };
             })
         }
 
         function getContentRequests() {
-            contactRequestsService.GetAll().then(function (data) {
+            contactRequestsService.getAll().then(function (data) {
                 vm.contactRequests = data;
             })
         }

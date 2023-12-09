@@ -7,7 +7,7 @@
             }, function () { });
         },
         getAll: function () {
-            return contactRequestsResource.GetAll().then(function (data) {
+            return contactRequestsResource.getAll().then(function (data) {
                 return data;
             }, function () { });
         }
