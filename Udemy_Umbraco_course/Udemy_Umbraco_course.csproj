@@ -10,14 +10,19 @@
     <Content Include="App_Plugins\BlockListElements\image\oldimagehtml.txt" />
     <Content Include="App_Plugins\BlockListElements\RichText\RichText.html" />
     <Content Include="App_Plugins\ContactRequests\contactrequests.html" />
+    <Content Include="App_Plugins\BlockListElements\ProductListing\productlisting.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Plugins\BlockListElements\image\image.controller.js" />
     <None Include="App_Plugins\BlockListElements\package.manifest" />
+    <None Include="App_Plugins\BlockListElements\ProductListing\productlisting.resource.js" />
+    <None Include="App_Plugins\BlockListElements\ProductListing\productlisting.service.js" />
+    <None Include="App_Plugins\BlockListElements\RichText\richtext.controller.js" />
     <None Include="App_Plugins\ContactRequests\contactrequests.resource.js" />
     <None Include="App_Plugins\ContactRequests\contactrequests.service.js" />
     <None Include="App_Plugins\ContactRequests\contactrequests.controller.js" />
     <None Include="App_Plugins\ContactRequests\package.manifest" />
+    <None Include="App_Plugins\BlockListElements\ProductListing\productlisting.controller.js" />
     <None Include="Views\Blog.cshtml" />
     <None Include="Views\Blogpost.cshtml" />
     <None Include="Views\contact.cshtml" />
