@@ -11,6 +11,7 @@
     <Content Include="App_Plugins\BlockListElements\RichText\RichText.html" />
     <Content Include="App_Plugins\ContactRequests\contactrequests.html" />
     <Content Include="App_Plugins\BlockListElements\ProductListing\productlisting.html" />
+    <Content Include="App_Plugins\ContactRequests\oldcontroller.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Plugins\BlockListElements\image\image.controller.js" />

@@ -1,4 +1,4 @@
-﻿function ContactRequestsResource($http, umbRequestHelper) {
+﻿function contactRequestsResource($http, umbRequestHelper) {
 
     return {
         getTotalNumber: function () {
@@ -16,4 +16,4 @@
     }
 }
 
-angular.module("umbraco.services").factory("ContactRequestResource", ContactRequestsResource);
+angular.module("umbraco.services").factory("contactRequestsResource", contactRequestsResource);

@@ -10,12 +10,17 @@ namespace UmbracoTutorial.Core.Services
 {
 	public class ContactRequestService : IContactRequestService
 	{
-		private readonly IScopeProvider _scopeProvider;
-		public ContactRequestService(IScopeProvider scopeProvider) 
+        [Obsolete]
+        private readonly IScopeProvider _scopeProvider;
+
+        [Obsolete]
+        public ContactRequestService(IScopeProvider scopeProvider) 
 		{ 
 			_scopeProvider = scopeProvider;
 		}
-		public async Task<int> SaveContactRequest(string name, string email, string message)
+
+        [Obsolete]
+        public async Task<int> SaveContactRequest(string name, string email, string message)
 		{
 			var contactRequest = new ContactRequestDBModel
 			{
@@ -31,7 +36,8 @@ namespace UmbracoTutorial.Core.Services
 			}
 		}
 
-		public async Task<ContactRequestDBModel?> GetById(int id)
+        [Obsolete]
+        public async Task<ContactRequestDBModel?> GetById(int id)
 		{
             using(var scope = _scopeProvider.CreateScope())
 			{
@@ -39,6 +45,7 @@ namespace UmbracoTutorial.Core.Services
             }
         }
 
+        [Obsolete]
         public async Task<int> GetTotalNumber()
         {
             using (var scope = _scopeProvider.CreateScope(autoComplete:true))
@@ -47,6 +54,7 @@ namespace UmbracoTutorial.Core.Services
             }
         }
 
+        [Obsolete]
         public async Task<List<ContactRequestDBModel>> GetAll()
         {
             using (var scope = _scopeProvider.CreateScope(autoComplete: true))

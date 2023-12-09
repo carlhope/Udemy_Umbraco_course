@@ -5,7 +5,7 @@ using UmbracoTutorial.Core.NotificationsHandlers;
 
 namespace Udemy_Umbraco_course.Extensions
 {
-	public static class UmbracoBuilderExtension
+	public static class UmbracoBuilderExtensions
 	{
 		public static IUmbracoBuilder AddContactRequestTable(this IUmbracoBuilder builder)
 		{
