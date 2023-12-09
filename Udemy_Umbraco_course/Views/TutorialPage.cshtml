@@ -3,5 +3,27 @@
 
 @{
 	Layout = "master.cshtml";
+
+    await Html.RenderPartialAsync("~/Views/Partials/SectionHeader.cshtml");
 }
-<h1>@Model.Description</h1>
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="col-md-3">
+            <nav class="nav-bar nav-bar--list">
+                @{
+               await Html.RenderPartialAsync("~/Views/Partials/Navigation/SubNavigation.cshtml");
+               }
+            </nav>
+        </div>
+
+        <div class="col-md-9">
+            <article>
+                @await Html.GetBlockListHtmlAsync(Umbraco.AssignedContentItem, "blockListContentBody");
+            </article>
+        </div>
+    </div>
+
+</section>

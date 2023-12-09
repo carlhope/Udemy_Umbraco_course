@@ -1,6 +1,10 @@
 ﻿{
   "css": [],
   "javascript": [
-    "~/App_Plugins/BlockListElements/image/image.controller.js"
+    "~/App_Plugins/BlockListElements/image/image.controller.js",
+    "~/App_Plugins/BlockListElements/RichText/richtext.controller.js",
+    "~/App_Plugins/BlockListElements/ProductListing/productlisting.controller.js",
+    "~/App_Plugins/BlockListElements/ProductListing/productlisting.resource.js",
+    "~/App_Plugins/BlockListElements/ProductListing/productlisting.service.js"
   ]
 }
