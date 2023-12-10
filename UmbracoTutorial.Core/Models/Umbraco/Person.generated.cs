@@ -74,6 +74,14 @@ namespace UmbracoTutorial.Core.UmbracoModels
 		public virtual string FacebookUsername => this.Value<string>(_publishedValueFallback, "facebookUsername");
 
 		///<summary>
+		/// Github user
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.3.3+d2ff2ea")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("githubUser")]
+		public virtual global::Newtonsoft.Json.Linq.JToken GithubUser => this.Value<global::Newtonsoft.Json.Linq.JToken>(_publishedValueFallback, "githubUser");
+
+		///<summary>
 		/// Instagram Username
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.3.3+d2ff2ea")]
