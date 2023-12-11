@@ -79,7 +79,7 @@ namespace UmbracoTutorial.Core.UmbracoModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "12.3.3+d2ff2ea")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("githubUser")]
-		public virtual global::Newtonsoft.Json.Linq.JToken GithubUser => this.Value<global::Newtonsoft.Json.Linq.JToken>(_publishedValueFallback, "githubUser");
+		public virtual object GithubUser => this.Value(_publishedValueFallback, "githubUser");
 
 		///<summary>
 		/// Instagram Username

@@ -33,8 +33,9 @@
         <div class="employee-grid">
             @foreach (Person person in Model.Children<Person>())
             {
+                var githubProfile = person.Value<UmbracoTutorial.Core.Models.GithubUserDTO>("githubUser");
 
-                <div class="employee-grid__item">
+                <div class="employee-grid__item" onclick="~/people/laura-weatherhead">
                     <div class="employee-grid__item__image" style="background-image: url('@person.Photo?.Url()')"></div>
                     <div class="employee-grid__item__details">
                         <h3 class="employee-grid__item__name">@person.Name</h3>
@@ -48,6 +49,14 @@
                             @{ SocialLink(person.LinkedInUsername, "LinkedIn"); }
                             @{ SocialLink(person.InstagramUsername, "Instagram"); }
                         </div>
+
+                        @if(githubProfile != null && githubProfile.UserName !="" && githubProfile.PreferredProgrammingLanguage!="")
+                        {
+                           <div class="github-information">
+                           <span><b>Github Username:</b>@(githubProfile?.UserName ??"")</span><br>
+                                <span><b>Programming language :</b>@(githubProfile?.PreferredProgrammingLanguage ?? "")</span>
+                           </div>
+                        }
                     </div>
                 </div>
             }
