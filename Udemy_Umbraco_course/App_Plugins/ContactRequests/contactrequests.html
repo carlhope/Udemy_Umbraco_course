@@ -1,4 +1,4 @@
-﻿<div ng-controller="contactrequestsController as vm">
+﻿ <div ng-controller="contactrequestsController as vm">
     <umb-box>
         <umb-box-header title="Amount of contact requests from contact form"></umb-box-header>
         <umb-box-content>
@@ -14,10 +14,10 @@
                 </uui-table-head>
 
                 <uui-table-row ng-repeat="r in vm.contactRequests">
-                    <uui-table-cell>r.Id</uui-table-cell>
-                    <uui-table-cell>r.Name</uui-table-cell>
-                    <uui-table-cell>r.Email</uui-table-cell>
-                    <uui-table-cell>r.Message</uui-table-cell>
+                    <uui-table-cell>{{r.Id}}</uui-table-cell>
+                    <uui-table-cell>{{r.Name}}</uui-table-cell>
+                    <uui-table-cell>{{r.Email}}</uui-table-cell>
+                    <uui-table-cell>{{r.Message}}</uui-table-cell>
                 </uui-table-row>
 
             </uui-table>

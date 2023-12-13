@@ -11,6 +11,9 @@
     <Content Include="App_Plugins\BlockListElements\RichText\RichText.html" />
     <Content Include="App_Plugins\ContactRequests\contactrequests.html" />
     <Content Include="App_Plugins\BlockListElements\ProductListing\productlisting.html" />
+    <Content Include="App_Plugins\ContactRequests\oldcontroller.txt" />
+    <Content Include="App_Plugins\GithubUser\githubuser.html" />
+    <Content Include="App_Plugins\PeopleListView\peoplelistview.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Plugins\BlockListElements\image\image.controller.js" />
@@ -23,6 +26,10 @@
     <None Include="App_Plugins\ContactRequests\contactrequests.controller.js" />
     <None Include="App_Plugins\ContactRequests\package.manifest" />
     <None Include="App_Plugins\BlockListElements\ProductListing\productlisting.controller.js" />
+    <None Include="App_Plugins\GithubUser\githubuser.controller.js" />
+    <None Include="App_Plugins\GithubUser\package.manifest" />
+    <None Include="App_Plugins\PeopleListView\package.manifest" />
+    <None Include="App_Plugins\PeopleListView\peoplelistview.controller.js" />
     <None Include="Views\Blog.cshtml" />
     <None Include="Views\Blogpost.cshtml" />
     <None Include="Views\contact.cshtml" />
