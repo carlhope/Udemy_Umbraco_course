@@ -81,6 +81,7 @@
     <PackageReference Include="Umbraco.Cms.Core" Version="12.3.3" />
     <PackageReference Include="Umbraco.Cms.Infrastructure" Version="12.3.3" />
     <PackageReference Include="Umbraco.TheStarterKit" Version="12.0.0" />
+    <PackageReference Include="uSync" Version="12.2.2" />
     <ProjectReference Include="..\UmbracoTutorial.Core\UmbracoTutorial.Core.csproj" />
     <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="68.2.0.9" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))" />
   </ItemGroup>
